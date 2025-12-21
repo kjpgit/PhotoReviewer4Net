@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- This was added in .NET 9, but we don't need the ugly extra files -->
+    <DisableBuildCompression>true</DisableBuildCompression>
+  </PropertyGroup>
+
+</Project>

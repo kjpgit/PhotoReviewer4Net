@@ -1,0 +1,224 @@
+/**** RESETS ****/
+html {
+  box-sizing: border-box;
+  line-height: 1.0;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+a, div, span, p, h1, h2, h3, h4, h5, h6, ul, ol, li, label {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+
+/************* MAIN WINDOW AND GLOBAL STUFF **************/
+html, body, #main, #listing_window, #media_window {
+  height: 100%;
+}
+
+#main {
+  color: var(--text-color);
+  scrollbar-color: var(--scroll-thumb-color) var(--scroll-track-color);
+  font-family: Roboto, Sans-Serif;
+  font-weight: 400;
+  /* xxword-break: break-all; */
+  overflow-wrap: anywhere;
+}
+
+#listing_window {
+  background-color: var(--background-window-color);
+}
+
+#listing_files_pane, #listing_options_pane {
+  background-color: var(--background-color);
+}
+
+#spinner_window {
+  z-index: 5;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  opacity: 0%;
+  transition: opacity 1s;
+}
+
+#main[data-active-action="1"] #spinner_window {
+  opacity: 100%;
+  transition: opacity 0s;
+}
+
+
+/************* FILE LISTING - PANE LAYOUT **************/
+#listing_window {
+  xgap: 1vw; /* not needed with margins around both panes */
+}
+
+#listing_files_pane {
+  flex: 80 0 0;
+  margin: 1vw;
+  padding: 1.5vw 1vw;
+  border-radius: 0.5vw;
+  box-shadow: var(--shadow-inset-color) 0 0 0.5vw 0 inset, var(--shadow-outset-color) 0 0 .2vw 0 ;
+}
+
+#listing_options_pane {
+  flex: 20 0 0;
+  margin: 1vw;
+  padding: 1.5vw .5vw;
+  border-radius: 0.5vw;
+  box-shadow: var(--shadow-inset-color) 0 0 0.5vw 0 inset, var(--shadow-outset-color) 0 0 .2vw 0 ;
+}
+
+
+/************* FILE LISTING - LEFT PANE **************/
+#listing_files_ul {
+  height: 100%;
+  overflow-y: auto;
+}
+#listing_files_ul li {
+  padding: 2px 0.5vw;
+  border-bottom: 1px solid gray;  /* px is fine, it scales with text ok */
+  margin-right: 0.5vw;  /* separation from scroll bar */
+}
+#listing_files_ul li:first-child {
+  xborder-top: 1px solid gray;  /* it looks better with this off, more like notebook paper */
+}
+#listing_files_ul li .icon {
+  margin-left: 0.3em;  /* em is fine because it's inside text */
+}
+
+
+/************* FILE LISTING - RIGHT PANE **************/
+
+#listing_options_scroll {
+  height: 100%;
+
+  /* After pulling my hair out with Chrome subpixel bugs, sometimes conjuring
+   * an unnecessary scrollbar, I'm turning it off */
+  overflow-y: hidden;
+}
+
+#listing_options_pane h2 {
+  text-align: center;
+}
+
+#listing_categories_ul {
+  margin-bottom: 2em;
+}
+
+#listing_categories_ul li {
+  font-size: 1.2rem;
+  padding: .3vw .9vw;
+  border-radius: 0.7em;
+}
+
+#listing_options_pane input, #listing_options_pane a {
+  margin-right: .3vw;
+  margin-left: .9vw;
+  margin-top: .3vw;
+  margin-bottom: .3vw;
+}
+
+#listing_options_pane a {
+  display: block;
+  text-decoration: underline;
+}
+
+
+/************* MEDIA (PLAYER) WINDOW **************/
+#media_window {
+  position: fixed;
+  z-index: 1;
+  inset: 0px;
+  background-color: var(--background-window-color);
+}
+
+#media_window_image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#media_window_video {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+#media_window_video video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+/************* MEDIA (PLAYER) WINDOW  - OVERLAY CONTROLS **************/
+#media_window_controls {
+  position: fixed;
+  top: -20vh;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: var(--background-window-color);
+
+  align-items: stretch;
+  gap: 1em;
+
+  padding: 1vw;
+  opacity: 0%;
+  transition: opacity 0.5s, top 0.5s ease 0s;
+}
+
+/* If the mouse has very recently moved, show the controls, no matter where the mouse is */
+#main[data-mouse-active="1"] #media_window_controls {
+  opacity: 100%;
+  top: 0px;
+}
+
+/* If the mouse has somewhat recently moved, show the controls, if the mouse is still over a button */
+#main[data-mouse-active2="1"] #media_window_controls:has(.button:hover) {
+  opacity: 100%;
+  top: 0px;
+}
+
+#media_window_controls .button {
+  font-size: 1.5rem;
+  padding: .3vw .9vw;
+  border-radius: 0.7em;
+}
+
+#media_window_controls_previous, #media_window_controls_next, #media_window_controls_close {
+  width: 7em;
+}
+
+#media_window_controls_good, #media_window_controls_unsure, #media_window_controls_bad {
+  width: 9em;
+  padding-left: 1em;
+  margin-bottom: 0;
+}
+
+#media_window_error {
+  z-index: 1;
+  position: fixed;
+  text-align: left;
+  top: 25vh;
+  bottom: 10vh;
+  left: 15vw;
+  right: 15vw;
+  font-size: 1.5rem;
+  padding: 1em;
+  border: .5vw solid red;
+  background-color: var(--background-color);
+  overflow-y: hidden;
+}

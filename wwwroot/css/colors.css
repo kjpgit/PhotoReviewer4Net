@@ -1,0 +1,35 @@
+/* light mode - default */
+:root {
+  --text-color: #111;
+  --text-disabled-color: #bbb;
+  --background-color: #fff;
+  --background-window-color: #ccc;
+  --background-hover-color: #d8ebff;
+  --selected-background-color: #0955ac;
+  --selected-border-color: #01336c;
+  --selected-text-color: #fff;
+
+  --shadow-inset-color: rgba(150, 150, 150, 1.0);
+  --shadow-outset-color: rgba(50, 50, 50, 0.5);
+
+  --scroll-thumb-color: #bbb;
+  --scroll-track-color: #eee;
+}
+
+.dark-mode {
+  --text-color: #eee;
+  --text-disabled-color: #555;
+  --background-color: #333;
+  --background-window-color: #111;
+  --background-hover-color: #444;
+  --selected-background-color: #555;
+  --selected-border-color: #ccc;
+  --selected-text-color: #fff;
+
+  --shadow-inset-color: rgba(0, 0, 0, 1.0);
+  --shadow-outset-color: rgba(0, 0, 0, 0.0);
+
+  --scroll-thumb-color: #777;
+  --scroll-track-color: #333;
+}
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <title>Photo Reviewer 4Net</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/colors.css">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+<script type=module src="code.js"></script>
+
+<div id="main">
+
+  <div id="spinner_window" class="lds-dual-ring"></div>
+
+  <div id="listing_window" data-display="flex">
+    <div id="listing_files_pane">
+      <ul id="listing_files_ul"></ul>
+    </div>
+    <div id="listing_options_pane">
+      <div id="listing_options_scroll" class="flex-column">
+        <h2>Filter</h2>
+        <ul id="listing_categories_ul">
+          <li class=button data-value=Good><span class="icon" data-value=Good></span> Good (<span class=count></span>)</li>
+          <li class=button data-value=Unsure><span class="icon" data-value=Unsure></span> Unsure (<span class=count></span>)</li>
+          <li class=button data-value=Bad><span class="icon" data-value=Bad></span> Bad (<span class=count></span>)</li>
+          <li class=button data-value=Unrated>Unrated (<span class=count></span>)</li>
+          <li class=button data-value=Rated>Rated (<span class=count></span>)</li>
+          <li class=button data-value=Everything>Everything (<span class=count></span>)</li>
+        </ul>
+
+        <h2>Options</h2>
+        <div>
+          <input id=input_auto_advance type=checkbox><label for="input_auto_advance">Automatically 
+            go next after rating</label>
+          <br>
+          <input id=input_dark_mode type=checkbox><label for="input_dark_mode">Dark mode</label>
+          <br>
+          <a href="javascript:void" id="download_file_list"></a>
+        </div>
+
+        <div class="flex-grow"></div>
+        <h2>Photo Reviewer 4Net</h2>
+      </div>
+    </div>
+  </div>
+
+  <div id="media_window" data-display="block">
+    <div id="media_window_controls" class="flex">
+
+      <!--  Commenting out because it looks cluttered
+      <div class="flex-column" id="media_window_controls_picture_number">
+        <div class="flex-grow"></div>
+        <div class="picture-number-border flex-column">
+          <div class="flex-grow"></div>
+          <div class="picture-number"></div>
+          <div class="flex-grow"></div>
+        </div>
+        <div class="flex-grow"></div>
+      </div>
+      -->
+
+      <div class="flex-grow"></div>
+
+      <div class="button flex-column" id="media_window_controls_previous">
+        <div class="flex-grow"></div>
+        <div class="centered">&lt;&nbsp;Prev&nbsp;<span class=hidden>&gt;</span></div>
+        <div class="centered shortcut">(left)</div>
+        <div class="flex-grow"></div>
+      </div>
+
+      <div class="button flex-column" id="media_window_controls_next">
+        <div class="flex-grow"></div>
+        <div class="centered"><span class=hidden>&lt;</span>&nbsp;Next&nbsp;&gt;</div>
+        <div class="centered shortcut">(right)</div>
+        <div class="flex-grow"></div>
+      </div>
+
+      <ul id="media_window_ratings_ul">
+        <li class="button button_flat" id="media_window_controls_good" data-value="Good"><span class="icon" data-value=Good></span><span> Good </span> <span class=shortcut>(g)</span></li>
+
+        <li class="button button_flat" id="media_window_controls_unsure" data-value="Unsure"><span class="icon" data-value=Unsure></span> Unsure <span class=shortcut>(s)</span></li>
+
+        <li class="button button_flat" id="media_window_controls_bad" data-value="Bad"><span class="icon" data-value=Bad></span> Bad <span class=shortcut>(b)</span></li>
+      </ul>
+
+      <div class="button flex-column" id="media_window_controls_close">
+        <div class="flex-grow"></div>
+        <div class="centered">Close</div>
+        <div class="centered shortcut">(q)</div>
+        <div class="flex-grow"></div>
+      </div>
+
+      <div class="flex-grow"></div>
+    </div>
+
+    <!-- img is a self closing tag, video is not -->
+    <img id=media_window_image>
+    <div id="media_window_video"></div>
+    <div id="media_window_error" data-display="block"></div>
+
+  </div>
+
+</div>
+
+
+</body>
+</html>
