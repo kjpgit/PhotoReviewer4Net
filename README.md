@@ -24,6 +24,22 @@ the list of files!
 Photo Reviewer 4Net runs on Linux, Mac, or Windows.  It's a small, modular, UNIX-philosophy tool,
 and there's no configuration file.
 
+### Quickstart - Docker
+
+You can easily run a containerized version as shown below.  It has read-only
+access to the media directory you specify, and write access to /tmp/ratings/ to
+save state.
+
+````
+mkdir /tmp/ratings   # The app can write a ratings file in this dir only
+
+docker run --init -p 8080:8080 \
+    -v ~/Pictures/2025:/media:ro \
+    -v /tmp/ratings:/tmp/ratings:rw \
+    public.ecr.aws/p5e0b0g4/kjpgit/photo_reviewer_4net:latest /media /tmp/ratings/ratings.json
+````
+
+
 ### Quickstart - UNIX
 
 To build the app, you need `dotnet` 8.0 or later installed.  That version was released
