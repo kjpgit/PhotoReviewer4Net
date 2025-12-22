@@ -121,7 +121,7 @@ public class ServerOptions
 
     private void ShowUsage(bool fullHelp = false) {
         string prog = IsWindows() ? "photo_reviewer_4net.exe" : "photo_reviewer_4net";
-        string mediaDir = IsWindows() ? "~\\Pictures\\2025.exe" : "~/Pictures/2025";
+        string mediaDir = IsWindows() ? "~\\Pictures\\2025" : "~/Pictures/2025";
         string ratingsFile = IsWindows() ? "c:\\temp\\ratings.json" : "/tmp/ratings.json";
 
         if (fullHelp) {
