@@ -47,7 +47,7 @@ and see when the web UI adds ratings in real time.
 
 ### Quickstart - Windows
 
-Download the [prebuilt binary zipfile](https://github.com/kjpgit/PhotoReviewer4Net/releases/download/1.0/PhotoReviewer4Net.zip) and extract it to `Downloads\PhotoReviewer4Net\`.
+Download the [prebuilt binary zipfile](https://github.com/kjpgit/PhotoReviewer4Net/releases/download/1.1/PhotoReviewer4Net.zip) and extract it to `Downloads\PhotoReviewer4Net\`.
 
 Start a PowerShell terminal (open the start menu and type "powersh" to find it).
 
