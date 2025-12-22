@@ -135,7 +135,8 @@ pictures, delete the "Bad" rated pictures, then delete the output json.
 * Does it use any *third-party libraries*?  Only normalize.css, to appease the
   wrathful browser gods.
 
-* Was *"AI"* used to make it?  No.
+* Was *"AI"* used to make it?  It was not used to create it, but another person
+  did some QA on the 1.0 version with it.
 
 * What did you *learn* from this project?  It is a great "full stack" challenge
   &mdash; frontend / backend / APIs / races / cross-platform / documentation &mdash; in
