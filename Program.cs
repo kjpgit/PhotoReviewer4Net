@@ -41,7 +41,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 builder.Services.AddSingleton<APIService>(apiService);
 builder.Services.AddSingleton<IHostLifetime, NoopConsoleLifetime>();
 builder.Services.AddSingleton<ILoggerProvider, MinimalConsoleLoggerProvider>();
-builder.WebHost.UseUrls([options.GetListenUrl()]);
+//builder.WebHost.UseUrls([options.GetListenUrl()]);
 
 
 var app = builder.Build();

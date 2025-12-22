@@ -7,6 +7,8 @@
 
     <!-- This was added in .NET 9, but we don't need the ugly extra files -->
     <DisableBuildCompression>true</DisableBuildCompression>
+
+    <PublishAot>true</PublishAot>
   </PropertyGroup>
 
 </Project>
