@@ -214,7 +214,7 @@ async function ShowMediaFile(li) {
 
 
     // Start loading the new image or video.
-    const media_stream =  `/api/GetMediaStream?filePath=${encodeURI(entry.FilePath)}`;
+    const media_stream =  `/api/GetMediaStream?filePath=${encodeURIComponent(entry.FilePath)}`;
     if (entry.FileType == "IMAGE") {
         dom.media_window_image.src = media_stream;
         dom.media_window_image.style.display = "block";
