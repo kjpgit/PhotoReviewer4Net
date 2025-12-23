@@ -128,7 +128,7 @@ Get-Content -path c:\temp\files.txt | ForEach-Object { Remove-Item -Confirm -Pat
 ## FAQ
 
 * What *media formats* can it play? It can play anything supported by your
-  browser, which is a lot these days.  However, old or non-standard
+  web browser, which is a lot these days.  However, old or non-standard
 video codecs might not work.
 
 * Can I make it *full screen*?  Yes.  Press `f` or double-click when viewing a video or
