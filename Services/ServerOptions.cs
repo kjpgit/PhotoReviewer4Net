@@ -24,8 +24,16 @@ public class ServerOptions
             string arg = raw_args[i];
             //Console.WriteLine($"arg {arg}, {i}");
             if (arg == "-a") {
+                if (IsDocker()) {
+                    Print($"Error: {arg} doesn't make sense in a container");
+                    Environment.Exit(1);
+                }
                 AllowAllIps = true;
             } else if (arg == "-p") {
+                if (IsDocker()) {
+                    Print($"Error: {arg} doesn't make sense in a container");
+                    Environment.Exit(1);
+                }
                 string p = RequireArg(raw_args, ++i, "PORT");
                 if (Int32.TryParse(p, out int port)) {
                     if (port < 0 || port > 65535) {
@@ -200,6 +208,10 @@ To list filenames with a specific rating, newline-terminated (for PowerShell):
 
     private void Print(string m) {
         Console.WriteLine(m);
+    }
+
+    public bool IsDocker() {
+        return String.Equals(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER"), "true");
     }
 
     private bool IsWindows() {
