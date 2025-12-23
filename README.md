@@ -149,6 +149,12 @@ pictures, delete the "Bad" rated pictures, then delete the output json.
 * Does the web interface work on *iPad/tablet*?  It runs admirably, but it
   wasn't designed for that form factor.
 
+* Why did you make this program?  It was a Christmas present for my wife (high
+  WAF is not a joke), and she greatly appreciated the effort... and the
+  improvement over our old tools.
+
+### Technical
+
 * Why *C#*?  Because it's maintained by adults and doesn't nag me with bullsh-t.
 
 * Why *Vanilla JS*?  I'm an old backend developer who values stability and minimal churn.  And I've
@@ -164,10 +170,6 @@ pictures, delete the "Bad" rated pictures, then delete the output json.
   &mdash; frontend / backend / APIs / races / cross-platform / documentation &mdash; in
 only 500&ndash;1000 lines of code.  Simple requirements, but very rewarding
 based on how deep you go.
-
-* Why did you make this program?  It was a Christmas present for my wife (high
-  WAF is not a joke), and she greatly appreciated the effort... and the
-  improvement over our old tools.
 
 
 ## License
