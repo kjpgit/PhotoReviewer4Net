@@ -6,7 +6,7 @@ public static class Constants
 
     // NB: .tiff not supported in chrome, complex format (multi-page and layers).
     public static string[] ImageExtensions = [
-        ".avif", ".bmp", ".gif", ".ico",
+        ".avif", ".bmp", ".gif", ".ico", ".heic",
         ".jfif", ".jpg", ".jpeg",
         ".png", ".svg", ".webp"
     ];
