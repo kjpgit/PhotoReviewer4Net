@@ -369,14 +369,13 @@ function CloseMediaWindow() {
 
 
 function ShowCategory(li) {
-    // Update the selected button
+    // Update the selected filter
     RemoveDatasetValueFromChildren(dom.listing_categories_ul, "selected");
     li.dataset.selected = "1";
 
     // Clear the file list table, and build its DOM from scratch.
-    // Note: this clears any selected row, which also causes headaches for keyboard navigation.
-    // (Which is the main reason I'm punting on implementing that for the table)
     //
+    const last_selected_file_li = TryGetSelectedFileListRow();
     const filter = GetCurrentFilter();
     let s = ""
     for (let i = 0; i < g_media_list.length; i++) {
@@ -386,6 +385,20 @@ function ShowCategory(li) {
         }
     }
     dom.listing_files_ul.innerHTML = s;
+
+    let new_selected_file_li = null;
+    if (last_selected_file_li != null) {
+        // Try to preserve the currently selected (last opened) row, if it's still in the filter
+        const masterIndex = last_selected_file_li.dataset.masterIndex
+        new_selected_file_li = dom.listing_files_ul.querySelector(`li[data-master-index="${masterIndex}"]`)
+    }
+    if (new_selected_file_li == null) {
+        // Otherwise, select the first row (if one exists).
+        new_selected_file_li = dom.listing_files_ul.querySelector(`:nth-child(1 of li)`)
+    }
+    if (new_selected_file_li != null) {
+        new_selected_file_li.dataset.selected = "1";
+    }
 
     dom.download_file_list.href = `/api/DownloadFileList?ratingFilter=${filter}`;
     dom.download_file_list.innerHTML = `Download file names as a text file`
