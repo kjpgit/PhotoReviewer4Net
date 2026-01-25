@@ -43,7 +43,19 @@ function GetMediaEntryForRow(li) {
 }
 
 function AdvanceFileList(li, delta) {
-    return delta < 0 ? li.previousSibling : li.nextSibling;
+    if (li == null) {
+        return null;
+    } else {
+        return delta < 0 ? li.previousSibling : li.nextSibling;
+    }
+}
+
+function SetSelectedListingFile(li) {
+    if (li != null) {
+        RemoveDatasetValueFromChildren(dom.listing_files_ul, "selected");
+        li.dataset.selected = "1";
+        li.scrollIntoView({ behavior: "instant", block: "center" });
+    }
 }
 
 // One of the 3 rating buttons
@@ -195,8 +207,7 @@ async function ShowMediaFile(li) {
     dom.media_window_error.dataset.visible = "0";
 
     // Update the selected table row
-    RemoveDatasetValueFromChildren(dom.listing_files_ul, "selected");
-    li.dataset.selected = "1";
+    SetSelectedListingFile(li);
 
     // Update the rating buttons
     RemoveDatasetValueFromChildren(dom.media_window_ratings_ul, "selected");
@@ -498,6 +509,15 @@ function AddEventListeners() {
             ShowMediaFile(AdvanceFileList(_GetSelectedFileListRow(), +1));
         } else if (event.key == 'q' && IsMediaWindowVisible()) {
             CloseMediaWindow();
+        } else if (event.key == 'ArrowUp' && !IsMediaWindowVisible()) {
+            SetSelectedListingFile(AdvanceFileList(TryGetSelectedFileListRow(), -1));
+            event.preventDefault();
+        } else if (event.key == 'ArrowDown' && !IsMediaWindowVisible()) {
+            SetSelectedListingFile(AdvanceFileList(TryGetSelectedFileListRow(), +1));
+            event.preventDefault();
+        } else if (event.key == 'Enter' && !IsMediaWindowVisible()) {
+            ShowMediaFile(TryGetSelectedFileListRow());
+            event.preventDefault();
         }
     })
     document.documentElement.addEventListener("mousemove", (event) => {
