@@ -376,6 +376,8 @@ function CloseMediaWindow() {
     } else {
         console.log("no file is currently selected")
     }
+
+    dom.listing_files_ul.focus();
 }
 
 
