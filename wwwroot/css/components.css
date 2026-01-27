@@ -26,7 +26,7 @@
 }
 
 .button:hover:not([data-selected]):not([data-disabled="1"]),
-    .datarow:hover:not([data-selected]) {
+    .xxdatarow:hover:not([data-selected]) {
   background-color: var(--background-hover-color);
 }
 

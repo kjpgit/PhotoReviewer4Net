@@ -43,7 +43,19 @@ function GetMediaEntryForRow(li) {
 }
 
 function AdvanceFileList(li, delta) {
-    return delta < 0 ? li.previousSibling : li.nextSibling;
+    if (li == null) {
+        return null;
+    } else {
+        return delta < 0 ? li.previousSibling : li.nextSibling;
+    }
+}
+
+function SetSelectedListingFile(li) {
+    if (li != null) {
+        RemoveDatasetValueFromChildren(dom.listing_files_ul, "selected");
+        li.dataset.selected = "1";
+        li.scrollIntoView({ behavior: "instant", block: "center" });
+    }
 }
 
 // One of the 3 rating buttons
@@ -195,8 +207,7 @@ async function ShowMediaFile(li) {
     dom.media_window_error.dataset.visible = "0";
 
     // Update the selected table row
-    RemoveDatasetValueFromChildren(dom.listing_files_ul, "selected");
-    li.dataset.selected = "1";
+    SetSelectedListingFile(li);
 
     // Update the rating buttons
     RemoveDatasetValueFromChildren(dom.media_window_ratings_ul, "selected");
@@ -365,18 +376,19 @@ function CloseMediaWindow() {
     } else {
         console.log("no file is currently selected")
     }
+
+    dom.listing_files_ul.focus();
 }
 
 
 function ShowCategory(li) {
-    // Update the selected button
+    // Update the selected filter
     RemoveDatasetValueFromChildren(dom.listing_categories_ul, "selected");
     li.dataset.selected = "1";
 
     // Clear the file list table, and build its DOM from scratch.
-    // Note: this clears any selected row, which also causes headaches for keyboard navigation.
-    // (Which is the main reason I'm punting on implementing that for the table)
     //
+    const last_selected_file_li = TryGetSelectedFileListRow();
     const filter = GetCurrentFilter();
     let s = ""
     for (let i = 0; i < g_media_list.length; i++) {
@@ -386,6 +398,20 @@ function ShowCategory(li) {
         }
     }
     dom.listing_files_ul.innerHTML = s;
+
+    let new_selected_file_li = null;
+    if (last_selected_file_li != null) {
+        // Try to preserve the currently selected (last opened) row, if it's still in the filter
+        const masterIndex = last_selected_file_li.dataset.masterIndex
+        new_selected_file_li = dom.listing_files_ul.querySelector(`li[data-master-index="${masterIndex}"]`)
+    }
+    if (new_selected_file_li == null) {
+        // Otherwise, select the first row (if one exists).
+        new_selected_file_li = dom.listing_files_ul.querySelector(`:nth-child(1 of li)`)
+    }
+    if (new_selected_file_li != null) {
+        new_selected_file_li.dataset.selected = "1";
+    }
 
     dom.download_file_list.href = `/api/DownloadFileList?ratingFilter=${filter}`;
     dom.download_file_list.innerHTML = `Download file names as a text file`
@@ -485,6 +511,15 @@ function AddEventListeners() {
             ShowMediaFile(AdvanceFileList(_GetSelectedFileListRow(), +1));
         } else if (event.key == 'q' && IsMediaWindowVisible()) {
             CloseMediaWindow();
+        } else if (event.key == 'ArrowUp' && !IsMediaWindowVisible()) {
+            SetSelectedListingFile(AdvanceFileList(TryGetSelectedFileListRow(), -1));
+            event.preventDefault();
+        } else if (event.key == 'ArrowDown' && !IsMediaWindowVisible()) {
+            SetSelectedListingFile(AdvanceFileList(TryGetSelectedFileListRow(), +1));
+            event.preventDefault();
+        } else if (event.key == 'Enter' && !IsMediaWindowVisible()) {
+            ShowMediaFile(TryGetSelectedFileListRow());
+            event.preventDefault();
         }
     })
     document.documentElement.addEventListener("mousemove", (event) => {
